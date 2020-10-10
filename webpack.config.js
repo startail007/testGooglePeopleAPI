@@ -1,9 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WebpackCopyPlugin = require("copy-webpack-plugin"); //資料複製
 const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin"); //壓縮css
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //清除檔案資料
-const WebpackCDNInject = require('webpack-cdn-inject');
+const WebpackCDNInject = require("webpack-cdn-inject");
 module.exports = {
   resolve: {
     //擴展路徑別名
@@ -87,6 +88,9 @@ module.exports = {
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ["./*"],
     }),
+    new WebpackCopyPlugin({
+      patterns: [{ from: "./src/google", to: "google" }],
+    }),
     new MiniCssExtractPlugin({ filename: "css/[name].[hash].css" }),
     new HtmlWebpackPlugin({
       title: "PORTFOLIO",
@@ -95,7 +99,7 @@ module.exports = {
     }),
     new OptimizeCssAssetsWebpackPlugin(),
     new WebpackCDNInject({
-      head: ["https://apis.google.com/js/api.js"]
-    })
+      head: ["https://apis.google.com/js/api.js"],
+    }),
   ],
 };
