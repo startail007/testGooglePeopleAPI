@@ -4,7 +4,7 @@ const googleClientInit = () => {
       clientId: "283144508560-40ugpd9i0hj6gepplhrroihd5gaujqss.apps.googleusercontent.com",
       scope: "profile https://www.googleapis.com/auth/user.birthday.read",
       discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/people/v1/rest"],
-      scope: "https://www.googleapis.com/auth/contacts.readonly",
+      //scope: "https://www.googleapis.com/auth/contacts.readonly",
     });
   });
 };
@@ -20,7 +20,7 @@ const googleLogin = () => {
       //const AuthResponse = GoogleUser.getAuthResponse(true);
       //const id_token = AuthResponse.id_token;
       //console.log(`id_token:${id_token}`);
-      gapi.client.people.people.connections
+      /*gapi.client.people.people.connections
         .list({
           resourceName: "people/me",
           pageSize: 10,
@@ -28,7 +28,7 @@ const googleLogin = () => {
         })
         .then(function (res) {
           console.log(res);
-        });
+        });*/
       gapi.client.people.people
         .get({
           resourceName: "people/me",
