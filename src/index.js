@@ -1,11 +1,18 @@
+document.cookie = "SameSite=Secure";
 const googleClientInit = () => {
+  gapi.load("auth2", () => {
+    //console.log(gapi);
+  });
   gapi.load("client", () => {
+    //console.log(gapi);
     gapi.client.init({
       clientId: "283144508560-40ugpd9i0hj6gepplhrroihd5gaujqss.apps.googleusercontent.com",
       scope: "profile https://www.googleapis.com/auth/user.birthday.read",
       discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/people/v1/rest"],
       //scope: "https://www.googleapis.com/auth/contacts.readonly",
     });
+    /*.then(() => {
+      });*/
   });
 };
 const googleLogin = () => {
