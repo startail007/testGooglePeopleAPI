@@ -35,8 +35,12 @@ const googleLogin = () => {
           personFields: "names,phoneNumbers,emailAddresses,addresses,residences,genders,birthdays,occupations",
         })
         .then((res) => {
-          const str = JSON.stringify(res.result);
-          document.getElementById("content").innerHTML = str;
+          console.log(res, res.result);
+          const data = res.result;
+          console.log(data);
+          /*const str = JSON.stringify(res.result);
+          document.getElementById("content").innerHTML = str;*/
+          document.getElementById("content").innerHTML = data.names[0].displayName;
         });
     },
     (error) => {

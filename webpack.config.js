@@ -93,9 +93,14 @@ module.exports = {
     }),*/
     new MiniCssExtractPlugin({ filename: "css/[name].[hash].css" }),
     new HtmlWebpackPlugin({
-      title: "PORTFOLIO",
+      title: "test",
       template: "./src/index.html",
       filename: "index.html",
+    }),
+    new HtmlWebpackPlugin({
+      title: "privacy",
+      template: "./src/privacy.html",
+      filename: "privacy.html",
     }),
     new OptimizeCssAssetsWebpackPlugin(),
     new WebpackCDNInject({
