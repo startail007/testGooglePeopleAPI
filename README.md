@@ -1,2 +1,3 @@
-# testGooglePeopleAPI
- 測試Google People API
+# 測試 Google People API
+
+[線上觀看](https://virtools.github.io/testGooglePeopleAPI/)
