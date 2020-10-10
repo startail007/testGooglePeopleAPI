@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackCopyPlugin = require("copy-webpack-plugin"); //資料複製
+//const WebpackCopyPlugin = require("copy-webpack-plugin"); //資料複製
 const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin"); //壓縮css
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //清除檔案資料
 const WebpackCDNInject = require("webpack-cdn-inject");
@@ -88,9 +88,9 @@ module.exports = {
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ["./*"],
     }),
-    new WebpackCopyPlugin({
+    /*new WebpackCopyPlugin({
       patterns: [{ from: "./src/google/google7cf3832be366e86b.html", to: "" }],
-    }),
+    }),*/
     new MiniCssExtractPlugin({ filename: "css/[name].[hash].css" }),
     new HtmlWebpackPlugin({
       title: "PORTFOLIO",
