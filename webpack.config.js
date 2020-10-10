@@ -89,7 +89,7 @@ module.exports = {
       cleanOnceBeforeBuildPatterns: ["./*"],
     }),
     new WebpackCopyPlugin({
-      patterns: [{ from: "./src/google", to: "google" }],
+      patterns: [{ from: "./src/google/google7cf3832be366e86b.html", to: "" }],
     }),
     new MiniCssExtractPlugin({ filename: "css/[name].[hash].css" }),
     new HtmlWebpackPlugin({
