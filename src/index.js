@@ -1,54 +1,76 @@
-document.cookie = "SameSite=Secure";
+const userName = document.getElementById("userName");
+const userImg = document.getElementById("userImg");
+const btnSignIn = document.getElementById("btnSignIn");
+const btnDisconnect = document.getElementById("btnDisconnect");
+const content = document.getElementById("content");
+userName.style.display = "none";
+userImg.style.display = "none";
+btnSignIn.style.display = "none";
+btnDisconnect.style.display = "none";
 const googleClientInit = () => {
-  gapi.load("auth2", () => {
-    //console.log(gapi);
-  });
-  gapi.load("client", () => {
-    //console.log(gapi);
-    gapi.client.init({
-      clientId: "283144508560-40ugpd9i0hj6gepplhrroihd5gaujqss.apps.googleusercontent.com",
-      scope: "profile https://www.googleapis.com/auth/user.birthday.read",
-      discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/people/v1/rest"],
-      //scope: "https://www.googleapis.com/auth/contacts.readonly",
+  const getPeopleData = () => {
+    return gapi.client.people.people
+      .get({
+        resourceName: "people/me",
+        personFields: "names,emailAddresses,genders,birthdays",
+      })
+      .then((res) => {
+        const data = res.result;
+        const name = data.names[0].displayName;
+        const date = data.birthdays[1].date;
+        return { data, name, date };
+      });
+  };
+
+  const signin = () => {
+    return getPeopleData().then((res) => {
+      userName.innerHTML = res.name;
     });
-    /*.then(() => {
-      });*/
+  };
+  gapi.load("client", () => {
+    gapi.client
+      .init({
+        clientId: "344268651055-m4ljngds85vblb87lgd4lbtl9rpge7v1.apps.googleusercontent.com",
+        scope: "profile https://www.googleapis.com/auth/user.birthday.read",
+        discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/people/v1/rest"],
+      })
+      .then(() => {
+        const googleAuth = gapi.auth2.getAuthInstance();
+        const signinChanged = (val) => {
+          if (val) {
+            userName.style.display = "";
+            userImg.style.display = "";
+            btnSignIn.style.display = "none";
+            btnDisconnect.style.display = "";
+            const basicProfile = googleAuth.currentUser.get().getBasicProfile();
+            userName.innerHTML = basicProfile.getName();
+            userImg.style.backgroundImage = `url(${basicProfile.getImageUrl()})`;
+            getPeopleData().then((res) => {
+              const date = res.date;
+              content.innerHTML = `${date.year} ${date.month} ${date.day}`;
+            });
+          } else {
+            userName.style.display = "none";
+            userImg.style.display = "none";
+            btnSignIn.style.display = "";
+            btnDisconnect.style.display = "none";
+            content.innerHTML = "";
+          }
+        };
+        signinChanged(googleAuth.isSignedIn.get());
+        /*const userChanged = (val) => {
+          console.log("aaaaaaaaaa", val);
+        };*/
+        googleAuth.isSignedIn.listen(signinChanged);
+        //googleAuth.currentUser.listen(userChanged);
+      });
   });
 };
 const googleLogin = () => {
   const auth2 = gapi.auth2.getAuthInstance();
   auth2.signIn().then(
     (googleUser) => {
-      //console.log(GoogleUser);
       console.log("Google登入成功");
-      console.log(googleUser.getBasicProfile().getImageUrl());
-      //const user_id = GoogleUser.getId();
-      //console.log(`user_id:${user_id}`);
-      //const AuthResponse = GoogleUser.getAuthResponse(true);
-      //const id_token = AuthResponse.id_token;
-      //console.log(`id_token:${id_token}`);
-      /*gapi.client.people.people.connections
-        .list({
-          resourceName: "people/me",
-          pageSize: 10,
-          personFields: "names,phoneNumbers,emailAddresses,addresses,residences,genders,birthdays,occupations",
-        })
-        .then(function (res) {
-          console.log(res);
-        });*/
-      gapi.client.people.people
-        .get({
-          resourceName: "people/me",
-          personFields: "names,phoneNumbers,emailAddresses,addresses,residences,genders,birthdays,occupations",
-        })
-        .then((res) => {
-          console.log(res, res.result);
-          const data = res.result;
-          console.log(data);
-          /*const str = JSON.stringify(res.result);
-          document.getElementById("content").innerHTML = str;*/
-          document.getElementById("content").innerHTML = data.names[0].displayName;
-        });
     },
     (error) => {
       console.log("Google登入失敗");
@@ -60,15 +82,12 @@ const googleLogin = () => {
 const googleDisconnect = () => {
   const auth2 = gapi.auth2.getAuthInstance();
   auth2.disconnect().then(() => {
-    console.log("User disconnect.");
+    console.log("Google登出");
   });
 };
-const btnSignIn = document.getElementById("btnSignIn");
 btnSignIn.addEventListener("click", () => {
-  document.getElementById("content").innerHTML = "";
   googleLogin();
 });
-const btnDisconnect = document.getElementById("btnDisconnect");
 btnDisconnect.addEventListener("click", () => {
   googleDisconnect();
 });

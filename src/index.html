@@ -4,10 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>測試</title>
+    <style>
+      .title {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      #userName {
+        margin: 0 0.5rem;
+      }
+      #content {
+        position: relative;
+        text-align: center;
+        font-size: 10rem;
+      }
+      #userImg {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      #btnSignIn,
+      #btnDisconnect {
+        height: 40px;
+      }
+    </style>
   </head>
   <body>
-    <button type="button" id="btnSignIn">Google登入</button>
-    <button type="button" id="btnDisconnect">斷連Google App</button>
+    <div class="title">
+      <button type="button" id="btnSignIn">Google登入</button>
+      <div id="userImg"></div>
+      <div id="userName"></div>
+      <button type="button" id="btnDisconnect">登出</button>
+    </div>
     <hr />
     <div id="content"></div>
   </body>

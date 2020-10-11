@@ -104,7 +104,7 @@ module.exports = {
     }),
     new OptimizeCssAssetsWebpackPlugin(),
     new WebpackCDNInject({
-      head: ["https://apis.google.com/js/api.js"],
+      head: ["https://apis.google.com/js/platform.js"],
     }),
   ],
 };
