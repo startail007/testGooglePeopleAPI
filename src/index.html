@@ -11,15 +11,7 @@
         justify-content: flex-end;
         align-items: center;
       }
-      #userName {
-        margin: 0 0.5rem;
-      }
-      #content {
-        position: relative;
-        text-align: center;
-        font-size: 10rem;
-      }
-      #userImg {
+      .userImg {
         position: relative;
         width: 40px;
         height: 40px;
@@ -27,20 +19,36 @@
         background-position: center;
         background-repeat: no-repeat;
       }
-      #btnSignIn,
-      #btnDisconnect {
+      .userName {
+        margin: 0 0.5rem;
+      }
+      #content {
+        position: relative;
+        text-align: center;
+        font-size: 10rem;
+      }
+      .title .btn {
         height: 40px;
       }
     </style>
   </head>
   <body>
     <div class="title">
-      <button type="button" id="btnSignIn">Google登入</button>
-      <div id="userImg"></div>
-      <div id="userName"></div>
-      <button type="button" id="btnDisconnect">登出</button>
+      <div>googleapis</div>
+      <button type="button" id="btnSignIn" class="btn">Google登入</button>
+      <div id="userImg" class="userImg"></div>
+      <div id="userName" class="userName"></div>
+      <button type="button" id="btnDisconnect" class="btn">登出</button>
     </div>
     <hr />
     <div id="content"></div>
+    <div class="title">
+      <div>firebase google</div>
+      <button type="button" id="firebase_btnSignIn" class="btn">登入</button>
+      <div id="firebase_userImg" class="userImg"></div>
+      <div id="firebase_userName" class="userName"></div>
+      <button type="button" id="firebase_btnSignOut" class="btn">登出</button>
+    </div>
+    <hr />
   </body>
 </html>
