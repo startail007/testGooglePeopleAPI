@@ -14,7 +14,6 @@ module.exports = {
       "@css": path.resolve(__dirname, "./src/css/"),
       "@js": path.resolve(__dirname, "./src/js/"),
       "@src": path.resolve(__dirname, "./src/"),
-      vue: "vue/dist/vue.esm.js",
     },
     //擴展副檔名
     extensions: [".js", ".json"],
